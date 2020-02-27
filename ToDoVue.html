@@ -1,0 +1,49 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>ToDoVue</title>
+
+    <link href="css/ToDoVue.css" rel="stylesheet">
+    <link href="https;//fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+</head>
+<body>
+
+    <div id="app">
+        <h1>ToDoVue</h1>
+        <input id="NewToDo" type="text" class="" placeholder="Add ToDo..." v-on:keyup.enter="addTodo" />
+
+        <ul>
+            <li v-for="todo in todos" :key="todo.id" class="ToDoItem flex">
+                <div class="GrippyThingie">&nbsp;</div>
+
+                <div class="NewCheckboxBlock">
+                    <div v-if="todo.done==false" class="NewCheckbox" v-on:click="checkBoxChecked(todo.id)"></div>
+                    <div v-else class="NewCheckbox--Checked" v-on:click="checkBoxChecked(todo.id)"></div>
+                </div>
+
+                <input :id="'checkBox__' + todo.id" type="checkbox" class="chkBox" v-model="todo.done" />
+
+                <del v-if="todo.done">{{ todo.text}}</del>
+                <span v-else>{{ todo.text}}</span>
+
+                <div class="space"></div>
+                <!-- TODO:  Add Edit Feature, Add Drag and Drop to sort Action Items -->
+                <!--button class="EditToDo"><img src="images/pencil.svg" /></!--button>-->
+                <button class="DeleteToDo is-error" v-on:click="removeTodo(todo.id)">X</button>
+            </li>
+        </ul>
+
+
+        <button id="ShowHideDataButton" class="ShowHideData is-error" v-on:click="showHideData()">show/hide data</button>
+
+        <pre id="AllDataDump">{{$data}}</pre>
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script src="js/ToDoVue.js"></script>
+
+</body>
+</html>
